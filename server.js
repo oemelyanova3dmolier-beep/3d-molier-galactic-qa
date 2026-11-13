@@ -14,7 +14,7 @@ function file(res,base,rel){const p=path.normalize(path.join(base,rel));if(!p.st
 http.createServer(async(req,res)=>{try{
  const u=new URL(req.url,"http://x"),p=decodeURIComponent(u.pathname);
  if(p=="/api/db"&&req.method=="GET")return send(res,200,db);
- if(p=="/api/whoami")return send(res,200,{owner:isAdmin(req)});
+ if(p==="/api/whoami")return send(res,200,{owner:isAdmin(req), hasPin:true, pinSet:true, adminExists:true});
  let m=/^\/api\/db\/(reports|config)\/([A-Za-z0-9_-]{1,64})$/.exec(p);
  if(m){const[,coll,id]=m;
   if(req.method=="PUT"){if(coll=="config"&&!isAdmin(req))return send(res,403,{error:"forbidden"});
