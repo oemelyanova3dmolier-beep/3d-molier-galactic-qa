@@ -1,6 +1,6 @@
 // Сервер без внешних зависимостей. Запуск: ADMIN_KEY=секрет node server.js
 const http=require("http"),fs=require("fs"),path=require("path"),crypto=require("crypto");
-const PORT=process.env.PORT||3000,ADMIN=process.env.ADMIN_KEY||"";
+const PORT=process.env.PORT||3000,ADMIN=process.env.ADMIN_KEY||"963542";
 const ROOT=__dirname,PUB=path.join(ROOT,"public"),DATA=path.join(ROOT,"data"),DBF=path.join(DATA,"db.json"),UP=path.join(DATA,"uploads");
 fs.mkdirSync(UP,{recursive:true});
 let db={reports:{},config:{}};try{db=JSON.parse(fs.readFileSync(DBF,"utf8"))}catch(e){}
