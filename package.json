@@ -1,0 +1,1 @@
+{"name":"galactic-qa","version":"1.0.0","description":"Галактическая инспекция качества: дашборд корпоративной игры","scripts":{"start":"node server.js"},"engines":{"node":">=16"},"license":"UNLICENSED","private":true}
