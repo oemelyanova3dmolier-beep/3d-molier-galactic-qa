@@ -1,6 +1,6 @@
 // Сервер без внешних зависимостей. Запуск: ADMIN_KEY=секрет node server.js
 const http=require("http"),fs=require("fs"),path=require("path"),crypto=require("crypto");
-const PORT=process.env.PORT||3000,ADMIN=process.env.ADMIN_KEY||"963542";
+const PORT=process.env.PORT||3000,ADMIN="963542";
 const ROOT=__dirname,PUB=path.join(ROOT,"public"),DATA=path.join(ROOT,"data"),DBF=path.join(DATA,"db.json"),UP=path.join(DATA,"uploads");
 fs.mkdirSync(UP,{recursive:true});
 let db={reports:{},config:{}};try{db=JSON.parse(fs.readFileSync(DBF,"utf8"))}catch(e){}
@@ -14,7 +14,7 @@ function file(res,base,rel){const p=path.normalize(path.join(base,rel));if(!p.st
 http.createServer(async(req,res)=>{try{
  const u=new URL(req.url,"http://x"),p=decodeURIComponent(u.pathname);
  if(p=="/api/db"&&req.method=="GET")return send(res,200,db);
- if(p==="/api/whoami")return send(res,200,{owner:req.headers["x-admin-key"]==="963542"||isAdmin(req)});
+if(p==="/api/whoami")return send(res,200,{owner:isAdmin(req), hasPin:true});
  let m=/^\/api\/db\/(reports|config)\/([A-Za-z0-9_-]{1,64})$/.exec(p);
  if(m){const[,coll,id]=m;
   if(req.method=="PUT"){if(coll=="config"&&!isAdmin(req))return send(res,403,{error:"forbidden"});
